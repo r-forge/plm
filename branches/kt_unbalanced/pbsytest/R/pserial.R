@@ -348,7 +348,7 @@ pbsytest.panelmodel <- function(x, test=c("ar","re","j"), ...){
          j={LM <- (n * t^2) / (2*(t-1)*(t-2)) * (A^2 - 4*A*B + 2*t*B^2) 
             df <- c(df=2)
             names(LM) <- "chisq"
-            pLM <- pchisq(LM,df=1,lower.tail=FALSE)
+            pLM <- pchisq(LM,df=df,lower.tail=FALSE)  # Degrees of freedom in the joint test (test="j") of Baltagi/Li (1991) should be 2 (chisquare(2) distributed, see Baltagi/Li (1991), p. 279 and again in Baltagi/Li (1995), p. 136
             tname <- "Baltagi and Li AR-RE joint test"
             myH0 <- "AR(1) errors or random effects"
           }
