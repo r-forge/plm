@@ -510,5 +510,12 @@ Changes since version 1.5-9
 	  there are used in model estimation (due to NA values); avoid calc. of RE model a second time;
 	  phtest now also works with between model correctly (fixed degrees of freedom)
 	  tests/test_phtest_Hausman_regression.R added
+	  
+	* lag.pseries(): modified to handle negative lags (=leading values);
+	  added function lead.pseries() for convenience [lag(x, k = -1) == lead(x, k = 1)];
+	  prevented negative lags as input for diff.pseries() to avoid confusion;
+	  made documentation for pseries functions available under their name, e.g. ?lag now displays helpfile for
+	  lag.pseries (and stats::lag in the help overview)
+	  
 
 
