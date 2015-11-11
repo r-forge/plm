@@ -515,5 +515,7 @@ Changes since version 1.5-9
 	  so functions like pmodel.response(), model.frame(), model.matrix(), residuals()
 	  return the original row.names (and thus fancy rownames if those were to be computed by pdata.frame);
 	  as.data.frame.pdata.frame(): respects row.names argument
+	  
+	* plmtest: unbalanced version of tests implemented; some fixes to p-values
 
 
