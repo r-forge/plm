@@ -9,13 +9,13 @@
 #
 # The text book only supplies examples for the balanced Grunfeld data
 # Thus, there are no reference values for an _un_balanced data set.
-#
+# -> compare calculatation of EViews on an unbalanced data set (grunfeld without last observation)
 
 # unbalanced formulas reduce in the case of a balanced panel to the formula for balanced panels:
 #
 #    balanced panel: => test output as in the text book => implementation is ok.
 #  unbalanced panel: => test statistics for unbalanced panel differ from balanced panel
-
+#                    => test matches calculcation of EViews
 
 # Tables reprinted here:
 #
@@ -108,6 +108,7 @@
 
 
 options(digits = 10)
+Sys.setenv(LANG = "en")
 require(plm)
 data(Grunfeld, package = "plm")
 Grunfeldpdata <- pdata.frame(Grunfeld, index = c("firm", "year"), drop.index = FALSE, row.names = TRUE)
@@ -115,8 +116,6 @@ Grunfeldpdata <- pdata.frame(Grunfeld, index = c("firm", "year"), drop.index = F
 fe_grunfeld    <- plm(inv ~ value + capital, data=Grunfeldpdata, model="within")
 re_grunfeld    <- plm(inv ~ value + capital, data=Grunfeldpdata, model="random")
 pool_grunfeld  <- plm(inv ~ value + capital, data=Grunfeldpdata, model="pooling")
-
-
 
 
 
@@ -150,67 +149,67 @@ plmtest(hedonic_pool, effect = "time")
 ### generalized version of plmtest() to handle also unbalanced panels
 
 # individual effect
-honda_ind            <- plmtest(pool_grunfeld, type="honda")
-honda_ind_unbalanced <- plmtest(pool_grunfeld_unbalanced, type="honda")
-bp_ind               <- plmtest(pool_grunfeld, type="bp")
-bp_ind_unbalanced    <- plmtest(pool_grunfeld_unbalanced, type="bp")
-kw_ind               <- plmtest(pool_grunfeld, type="kw")
-kw_ind_unbalanced    <- plmtest(pool_grunfeld_unbalanced, type="kw")
+print(honda_ind            <- plmtest(pool_grunfeld, type="honda"))
+print(honda_ind_unbalanced <- plmtest(pool_grunfeld_unbalanced, type="honda"))
+print(bp_ind               <- plmtest(pool_grunfeld, type="bp"))
+print(bp_ind_unbalanced    <- plmtest(pool_grunfeld_unbalanced, type="bp"))
+print(kw_ind               <- plmtest(pool_grunfeld, type="kw"))
+print(kw_ind_unbalanced    <- plmtest(pool_grunfeld_unbalanced, type="kw"))
 # Note: ghm is only for twoways, hence not in this section
 
 # time effect
-honda_time            <- plmtest(pool_grunfeld, type="honda", effect="time")
-honda_time_unbalanced <- plmtest(pool_grunfeld_unbalanced, type="honda", effect="time")
-bp_time               <- plmtest(pool_grunfeld, type="bp", effect="time")
-bp_time_unbalanced    <- plmtest(pool_grunfeld_unbalanced, type="bp", effect="time")
-kw_time               <- plmtest(pool_grunfeld, type="kw", effect="time")
-kw_time_unbalanced    <- plmtest(pool_grunfeld_unbalanced, type="kw", effect="time")
+print(honda_time            <- plmtest(pool_grunfeld, type="honda", effect="time"))
+print(honda_time_unbalanced <- plmtest(pool_grunfeld_unbalanced, type="honda", effect="time"))
+print(bp_time               <- plmtest(pool_grunfeld, type="bp", effect="time"))
+print(bp_time_unbalanced    <- plmtest(pool_grunfeld_unbalanced, type="bp", effect="time"))
+print(kw_time               <- plmtest(pool_grunfeld, type="kw", effect="time"))
+print(kw_time_unbalanced    <- plmtest(pool_grunfeld_unbalanced, type="kw", effect="time"))
 # Note: ghm is only for twoways, hence not in this section
 
 # twoways effect
-honda_tw            <- plmtest(pool_grunfeld, type="honda", effect="twoways")
-honda_tw_unbalanced <- plmtest(pool_grunfeld_unbalanced, type="honda", effect="twoways")
-bp_tw               <- plmtest(pool_grunfeld, type="bp", effect="twoways")
-bp_tw_unbalanced    <- plmtest(pool_grunfeld_unbalanced, type="bp", effect="twoways")
-kw_tw               <- plmtest(pool_grunfeld, type="kw", effect="twoways")
-kw_tw_unbalanced    <- plmtest(pool_grunfeld_unbalanced, type="kw", effect="twoways")
-ghm_tw              <- plmtest(pool_grunfeld, type="ghm", effect="twoways")
-ghm_tw_unbalanced   <- plmtest(pool_grunfeld_unbalanced, type="ghm", effect="twoways")
+print(honda_tw            <- plmtest(pool_grunfeld, type="honda", effect="twoways"))
+print(honda_tw_unbalanced <- plmtest(pool_grunfeld_unbalanced, type="honda", effect="twoways"))
+print(bp_tw               <- plmtest(pool_grunfeld, type="bp", effect="twoways"))
+print(bp_tw_unbalanced    <- plmtest(pool_grunfeld_unbalanced, type="bp", effect="twoways"))
+print(kw_tw               <- plmtest(pool_grunfeld, type="kw", effect="twoways"))
+print(kw_tw_unbalanced    <- plmtest(pool_grunfeld_unbalanced, type="kw", effect="twoways"))
+print(ghm_tw              <- plmtest(pool_grunfeld, type="ghm", effect="twoways"))
+print(ghm_tw_unbalanced   <- plmtest(pool_grunfeld_unbalanced, type="ghm", effect="twoways"))
 
 
 
 ### Test of formula interface
 
 # individual effect
-honda_ind_form            <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="honda")
-honda_ind_unbalanced_form <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="honda")
-bp_ind_form               <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="bp")
-bp_ind_unbalanced_form    <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="bp")
-kw_ind_form               <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="kw")
-kw_ind_unbalanced_form    <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="kw")
+print(honda_ind_form            <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="honda"))
+print(honda_ind_unbalanced_form <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="honda"))
+print(bp_ind_form               <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="bp"))
+print(bp_ind_unbalanced_form    <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="bp"))
+print(kw_ind_form               <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="kw"))
+print(kw_ind_unbalanced_form    <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="kw"))
 # Note: ghm is only for twoways, hence not in this section
 
 # time effect
-honda_time_form            <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="honda", effect="time")
-honda_time_unbalanced_form <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="honda", effect="time")
-bp_time_form               <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="bp", effect="time")
-bp_time_unbalanced_form    <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="bp", effect="time")
-kw_time_form               <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="kw", effect="time")
-kw_time_unbalanced_form    <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="kw", effect="time")
+print(honda_time_form            <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="honda", effect="time"))
+print(honda_time_unbalanced_form <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="honda", effect="time"))
+print(bp_time_form               <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="bp", effect="time"))
+print(bp_time_unbalanced_form    <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="bp", effect="time"))
+print(kw_time_form               <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="kw", effect="time"))
+print(kw_time_unbalanced_form    <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="kw", effect="time"))
 # Note: ghm is only for twoways, hence not in this section
 
 # twoways effect
-honda_tw_form            <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="honda", effect="twoways")
-honda_tw_unbalanced_form <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="honda", effect="twoways")
-bp_tw_form               <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="bp", effect="twoways")
-bp_tw_unbalanced_form    <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="bp", effect="twoways")
-kw_tw_form               <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="kw", effect="twoways")
-kw_tw_unbalanced_form    <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="kw", effect="twoways")
-ghm_tw_form              <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="ghm", effect="twoways")
-ghm_tw_unbalanced_form   <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="ghm", effect="twoways")
+print(honda_tw_form            <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="honda", effect="twoways"))
+print(honda_tw_unbalanced_form <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="honda", effect="twoways"))
+print(bp_tw_form               <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="bp", effect="twoways"))
+print(bp_tw_unbalanced_form    <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="bp", effect="twoways"))
+print(kw_tw_form               <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="kw", effect="twoways"))
+print(kw_tw_unbalanced_form    <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="kw", effect="twoways"))
+print(ghm_tw_form              <- plmtest(inv ~ value + capital, data=Grunfeldpdata, type="ghm", effect="twoways"))
+print(ghm_tw_unbalanced_form   <- plmtest(inv ~ value + capital, data=Grunfeldpdata_unbalanced, type="ghm", effect="twoways"))
 
 # Should all be TRUE
-all(
+if(!all(
   identical(honda_ind,            honda_ind_form),
   identical(honda_ind_unbalanced, honda_ind_unbalanced_form),
   identical(bp_ind,               bp_ind_form),
@@ -232,10 +231,10 @@ all(
   identical(kw_tw,               kw_tw_form),   
   identical(kw_tw_unbalanced,    kw_tw_unbalanced_form),
   identical(ghm_tw,              ghm_tw_form),   
-  identical(ghm_tw_unbalanced,   ghm_tw_unbalanced_form))
+  identical(ghm_tw_unbalanced,   ghm_tw_unbalanced_form))) stop("results of plm and formula interface differ!")
 
 
-# Tests - unbalanced - statistics should be sufficiently different from balanced statistics,
+# Tests - unbalanced - statistics should be "sufficiently different" from balanced statistics,
 # thus results should be TRUE
 
   # individual
@@ -270,9 +269,9 @@ pnorm(qnorm(alpha, lower.tail = F), lower.tail = F)
 # honda (kw) p-value implementation as in plm_v1.4-0 (CRAN as of 2015-11-08):
 # leads to the 10% level (not 5%):
 # see also above the table for the unbalanced Grunfeld data on how EViews handles negative statistics for Honda and KW
-# => To be discussed further
 pnorm(abs(1.645), lower.tail = FALSE)*2 # CRAN v1.4-0
-
+# correct is -> p=0.05
+pnorm(abs(1.645), lower.tail = FALSE)
 
 
 #### bp: df=1 (oneway) -> 3.841
@@ -287,7 +286,7 @@ pchisq(qchisq(alpha, df = 2, lower.tail = F), df=2, lower.tail = F)
 
 #### ghm    test for p-value of mixed chi-square distribution (more often called chi-bar-square)
 #           as implemented in fixed version.
-#           (was simple chisqure in plm_v1.4-0 on CRAN -> wrong)
+#           (was simple chisquare in plm_v1.4-0 on CRAN -> wrong)
 #
 # Baltagi (2013), p. 88 (note 2), p. 209 (note 10) gives critical values for 0.01, 0.05, 0.10 levels
 # 4.321 is a typo in the notes of Baltagi's textbook, should be 4.231 [confirmed by private email from Badi Baltagi]
@@ -301,26 +300,3 @@ p.vals <- (1/4)*pchisq(crit, df=0, lower.tail = F) + (1/2) * pchisq(crit, df=1, 
 crit_2 <- c(2.706) # for alpha=0.05
 p.val_2 <- (1/2)*pchisq(crit_2, df=0, lower.tail = F) + (1/2) * pchisq(crit_2, df=1, lower.tail = F)
 
-
-
-
-
-
-
-#### test of old (v1.4-0) vs. new implementation:
-# 1st: compute honda_orig and the like with plmtest of v1.4-0 (balanced tests)
-# 2nd: compare to new implementation
-
-# # Tests - balanced - should give the same statistic, thus the results should be TRUE
-#   # individual
-#   abs(honda_ind$statistic - honda_orig$statistic) < 0.00000000001
-#   abs(bp_ind$statistic    - bp_orig$statistic)    < 0.00000000001
-#   
-#   # time
-#   abs(honda_time$statistic - honda_orig_time$statistic) < 0.00000000001
-#   abs(bp_time$statistic    - bp_orig_time$statistic)    < 0.00000000001
-#   
-#   # twoways
-#   abs(kw_tw$statistic  - kw_orig_tw$statistic)    < 0.00000000001
-#   abs(ghm_tw$statistic - ghm_orig_tw$statistic)   < 0.00000000001
-# 
