@@ -43,9 +43,12 @@ echo $contents; } ?>
 
 <!-- end of project description -->
 
-<p> No content added. </p>
+<p>The development version of package 'plm' is hosted here on R-Forge.</p>
+<p>For official CRAN releases of the package, see <a href="https://cran.r-project.org/package=plm">plm on CRAN</a>. </p>
 
-<p> The <strong>project summary page</strong> you can find <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>. </p>
+<p>The <strong>project summary page</strong> you can find <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>. </p>
+<p>The packaged development version is <a href="http://r-forge.r-project.org/R/?group_id=406">here</a>.</p>
+
 
 </body>
 </html>
